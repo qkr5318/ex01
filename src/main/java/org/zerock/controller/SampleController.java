@@ -4,6 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.domain.SampleDTO;
 import org.zerock.domain.SampleDTOList;
 import org.zerock.domain.TodoDTO;
@@ -100,7 +104,30 @@ public class SampleController {
 			log.info("/ex05........");
 		}
 		
+		// JSON데이터 사용 p.146 이내용 중요 JSON DATA로 리턴을 받을땐 jackson=datbind 가 필요
+		@GetMapping("/ex06")
+		public @ResponseBody SampleDTO ex06() {
+			log.info("/ex06...............");
+			SampleDTO dto = new SampleDTO();
+			dto.setAge(30);
+			dto.setName("감스트");
+			
+			return dto;
+		}
 		
+		// ResponseEntity 타입 p148
+		@GetMapping("/ex07")
+		public ResponseEntity<String> ex07(){
+			log.info("/ex07..................");
+			
+			// {"name" : "감스트"} 웹에는 특수문자로 인식을 못함으로 \를 아래와 같이 사용해야한다
+			String msg = "{\"name\" : \"감스트\"}";
+			
+			HttpHeaders header = new HttpHeaders();
+			header.add("Content-Type", "application/json;charset=UTF-8");
+			
+			return new ResponseEntity<String>(msg, header, HttpStatus.OK);
+		}
 		
 	
 
