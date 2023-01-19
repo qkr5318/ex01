@@ -91,7 +91,9 @@
 		    <scope>provided</scope>
 		</dependency>
 
-		<!-- 아래에 servlet-api를 javax.servlet-api 3.1.0 version으로 변경 확인 바랍니다. -->
+			<!-- 아래에 servlet-api를 javax.servlet-api 3.1.0 version으로 변경 확인 바랍니다. -->
+		
+		<!-- 아래 log4j dependency에서 하단 <scop>runtime</scope> 제거 -->
 		<!-- 아래 log4j 1.2.17 version 변경 확인 바랍니다 -->
        
        <!-- 아래 jnuit 4.12 version 변경 확인 바랍니다 -->
